@@ -1,5 +1,5 @@
 const emails = require('../models/emails');
-const api = require('../api/api');
+const bitrix = require('../api/bitrix');
 
 function prepareParamsArray(req) {
   try {
@@ -64,10 +64,21 @@ async function startQueue() {
         console.log("Template don't found");
         break;
     }
-    //console.log(obj);
-    console.log(api);
-    //let a = await api.execMethod('crm.deal.get', { id: obj._id });
 
+    console.log(obj);
+
+    let deal = await bitrix.execMethod('crm.deal.get', { id: obj.deal_id });
+    let {
+      TITLE: deal_name,
+      COMPANY_ID: company_id,
+      UF_CRM_1520861014: bill_id,
+      UF_CRM_5CB9EAE29B418: product_id,
+      UF_CRM_5CBDF5A037324: segment_id,
+      UF_CRM_1550228289: party_id,
+      UF_CRM_1520864890: email_to
+    } = deal.result;
+
+    console.log(deal)
   } catch (error) {
     console.log(error);
   }

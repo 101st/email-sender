@@ -5,7 +5,7 @@ module.exports = {
       host: 'run24.bitrix24.ru',
       user_id: '1513',
       webhook_token: 'v5prxf1c1gdyya56',
-      auth_type: true
+      auth_type: 'webhook_token'
     }
   },
   prod: {
