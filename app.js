@@ -13,7 +13,7 @@ const service = require('./service/service');
 mongoose.Promise = global.Promise;
 mongoose.connect(config.dev.mongodb, { useNewUrlParser: true }, function () {
   console.log('Mongodb connected');
-  //service.startQueue();
+  service.startQueue();
 });
 
 var app = express();

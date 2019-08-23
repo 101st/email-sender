@@ -65,7 +65,7 @@ async function startQueue() {
         break;
     }
     console.log(obj);
-    //console.log(api);
+    console.log(api);
     //let a = await api.execMethod('crm.deal.get', { id: obj._id });
 
   } catch (error) {
