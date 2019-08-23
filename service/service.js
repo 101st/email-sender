@@ -64,7 +64,7 @@ async function startQueue() {
         console.log("Template don't found");
         break;
     }
-    console.log(obj);
+    //console.log(obj);
     console.log(api);
     //let a = await api.execMethod('crm.deal.get', { id: obj._id });
 
