@@ -1,11 +1,99 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="https://runexis.ru/favicon.ico">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/preact/dist/preact.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/3.13.2/antd.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.13.2/antd.min.css">
+</head>
+
+<body style="overflow-y: scroll">
+  <div class="container">
+    <form class="needs-validation" novalidate>
+      <div class="form-group">
+        <label for="form1">Args</label>
+        <input type="text" class="form-control" id="args" placeholder="deal_id;period_id;file1;doc1" required
+          value="deal_id;year_id;period_id;file1;doc1">
+        <div class="invalid-feedback">
+          Заполните поле
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="form1">Params</label>
+        <textarea class="form-control" rows=7 id="params" required>1145;29777;29791;123_invoice_04_245fsrff45345fds.pdf;Счёт</textarea>
+        <div class="invalid-feedback">
+          Заполните поле
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="form1">Type: </label>
+        <input type="text" style="display: none;" class="form-control" id="type_" required value="invoice1">
+        <a class="dropdown-toggle" href="#" id="type" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          invoice1
+        </a>
+        <div class="dropdown-menu" aria-labelledby="type">
+          <a class="dropdown-item" href="#">invoice1</a>
+        </div>
+        <div class="invalid-feedback">
+          Заполните поле
+        </div>
+      </div>
+      <section id="alert"></section>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  <script>
+
+    (function () {
+      'use strict';
+
+      window.addEventListener('load', function () {
+        $('div[aria-labelledby="type"]>a').on('click', function (event) {
+          $('#type_').val(event.target.innerHTML);
+          $('#type').html(event.target.innerHTML);
+        })
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            form.classList.add('was-validated');
+
+            let args = $("#args").val();
+            let params = $("#params").val();
+            let type = $("#type_").val();
+
+            if (args && params && type) {
+              $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api",
+                data: {
+                  args: args,
+                  params: params,
+                  type: type
+                }
+              }).done(response => {
+                $("#alert").html('<span style="color: lightgreen; font-size: 35px">' + JSON.stringify(response) + '</span>');
+              }).fail(error => {
+                $("#alert").html('<span style="color: red; font-size: 35px">' + JSON.stringify(response) + '</span>');
+              });
+            }
+
+          }, false);
+        });
+      }, false);
+    })(jQuery);
+  </script>
+</body>
+
 </html>
