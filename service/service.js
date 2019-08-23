@@ -65,7 +65,19 @@ async function startQueue() {
         break;
     }
 
-    console.log(obj);
+    let {
+      _id,
+      type,
+      deal_id,
+      year_id,
+      period_id,
+      file1,
+      file2,
+      file3,
+      doc1,
+      doc2,
+      doc3
+    } = obj;
 
     let deal = await bitrix.execMethod('crm.deal.get', { id: obj.deal_id });
     let {
@@ -78,7 +90,42 @@ async function startQueue() {
       UF_CRM_1520864890: email_to
     } = deal.result;
 
-    console.log(deal)
+    let company = await bitrix.execMethod('crm.company.get', { id: company_id });
+    let { TITLE: company_name } = company.result;
+
+    let element_277 = await bitrix.execMethod('lists.element.get', {
+      IBLOCK_TYPE_ID: 'bitrix_processes',
+      IBLOCK_ID: '277',
+      ELEMENT_ID: year_id
+    });
+    let { 191301: year_print } = element_277.result[0].PROPERTY_1903;
+
+    let element_279 = await bitrix.execMethod('lists.element.get', {
+      IBLOCK_TYPE_ID: 'bitrix_processes',
+      IBLOCK_ID: '279',
+      ELEMENT_ID: period_id
+    });
+    let { 188581: period_print } = element_279.result[0].PROPERTY_1897;
+
+    let element_205 = await bitrix.execMethod('lists.element.get', {
+      IBLOCK_TYPE_ID: 'bitrix_processes',
+      IBLOCK_ID: '205',
+      ELEMENT_ID: product_id
+    });
+    let { NAME: product_name } = element_205.result[0];
+    let { '155881': product_email_support } = element_205.result[0].PROPERTY_1797;
+    let { '157959': product_email_invoice } = element_205.result[0].PROPERTY_1803;
+    let { '155907': product_domain_storage } = element_205.result[0].PROPERTY_1799;
+    let { '155909': product_url_tt } = element_205.result[0].PROPERTY_1801;
+
+    let element_199 = await bitrix.execMethod('lists.element.get', {
+      IBLOCK_TYPE_ID: 'bitrix_processes',
+      IBLOCK_ID: '199',
+      ELEMENT_ID: party_id
+    });
+    let { NAME: party_name } = element_199.result[0];
+  
+    console.log('Prepare data');
   } catch (error) {
     console.log(error);
   }
