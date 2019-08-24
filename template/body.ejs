@@ -1,0 +1,115 @@
+<head></head>
+
+<body style="padding: 1.5em;">
+
+    <!-- BLOCK_DISCLAIMER -->
+    <p><strong>Пожалуйста, не отвечайте на это письмо! Оно сформировано автоматически!<br />
+            По всем вопросам обращайтесь на адрес <a
+                href="mailto:<%= product_email_support %>"><%= product_email_support %></a></strong>
+    </p>
+
+    <p>&nbsp;</p>
+
+
+    <!-- BLOCK_HELLO -->
+    <% if (segment_id === '12445') { %>
+    <p>Здравствуйте! Группа компаний Runexis выражает признательность за взаимовыгодное сотрудничество!</p>
+    <% } else { %>
+    <p>Здравствуйте! Спасибо, что пользуетесь услугами <%= product_name %>!</p>
+    <% } %>
+
+
+    <!-- BLOCK_REMARK -->
+    <% if (party_id === '8117') { %>
+    <table border="1" width="100%">
+
+        <tr>
+            <td style="padding: 5px;">
+
+                <p>В целях оптимизации и перераспределения сфер деятельности и в соответствии с агентским договором №
+                    1А/2019 от 30.01.2019 г. ООО "ТЕЛЛАН" передает функции по выставлению счетов, оформлению и
+                    направлению первичных учетных документов, сбору денежных средств и взысканию дебиторской
+                    задолженности ООО "Инфрасеть".</p>
+
+                <p>Официальное письмо "Об изменении реквизитов ТЕЛЛАН" – <a
+                        href="https://docs.runexis.ru/legal/2019-01-30_tellan_infraset.pdf"
+                        target="_blank"><strong>открыть</strong></a></p>
+
+                <p>Доверенность от ООО "ТЕЛЛАН" – <a
+                        href="https://docs.runexis.ru/legal/2019-01-30_procuration_tellan_infraset.pdf"
+                        target="_blank"><strong>открыть</strong></a></p>
+
+                <p>Обратите внимание – в соответствии с агентским договором в счетах <strong>в качестве исполнителя
+                        указано ООО "ТЕЛЛАН"</strong>, а <strong>получатель – ООО "Инфрасеть"</strong>. Кроме того,
+                    <strong>УПД, как и раньше, выставляются от ООО "ТЕЛЛАН".</strong></p>
+
+            </td>
+        </tr>
+
+    </table>
+
+    <p>&nbsp;</p>
+    <% } %>
+
+
+    <!-- BLOCK_LINKS -->
+    <p>Документы за <%= period_print %> <%= year_print %> для <%= company_name %> от <%= party_name %> по договору
+        <%= deal_name %>:</p>
+
+    <% if(typeof doc1 !== 'undefined') {%>
+    <p><a href="<%= product_domain_storage %><%= file1 %>"
+            target="_blank"><strong><%= doc1 %></strong><br /><%= product_domain_storage %><%= file1 %><br
+                clear="all"><img src="<%= product_domain_storage %>pic/file_pdf2.png"
+                alt="<%= product_domain_storage %><%= file1 %>" /></a></p>
+    <%}%>
+    <% if(typeof doc2 !== 'undefined') {%>
+    <p><a href="<%= product_domain_storage %><%= file2 %>"
+            target="_blank"><strong><%= doc2 %></strong><br /><%= product_domain_storage %><%= file2 %><br
+                clear="all"><img src="<%= product_domain_storage %>pic/file_pdf2.png"
+                alt="<%= product_domain_storage %><%= file2 %>" /></a></p>
+    <%}%>
+    <% if(typeof doc3 !== 'undefined') {%>
+    <p><a href="<%= product_domain_storage %><%= file3 %>"
+            target="_blank"><strong><%= doc3 %></strong><br /><%= product_domain_storage %><%= file3 %><br
+                clear="all"><img src="<%= product_domain_storage %>pic/file_pdf2.png"
+                alt="<%= product_domain_storage %><%= file3 %>" /></a></p>
+    <%}%>
+    <p>&nbsp;</p>
+    
+    
+    <!-- BLOCK_EMAILS -->
+    <p>Это письмо отправлено на следующие адреса:<br />
+	<code><%= email_to %></code>
+    </p>
+
+
+    <!-- BLOCK_FEEDBACK -->
+    <% if (product_id === '9561' || product_id === '9563') {%>
+    <p>Если у Вас возникнут вопросы, напишите нам:<br />
+        - <strong><a href="<%= product_tt_url %>" target="_blank">из личного кабинета</a></strong><br />
+        - или на <a href="mailto:<%= product_email_support %>"><%= product_email_support %></a>
+    </p>
+    <% } else { %>
+    <p>Если у Вас возникнут вопросы, напишите нам на адрес <a
+            href="mailto:<%= product_email_support %>"><%= product_email_support %></a></p>
+    <% } %>
+
+
+    <!-- BLOCK_SIGN -->
+    <p>&nbsp;</p>
+
+    <p>–––<br />
+        С уважением, служба поддержки <%= product_name %>
+    </p>
+
+    <p>&nbsp;</p>
+
+
+    <!-- BLOCK_BANNER -->
+    <p><a href="https://www.diadoc.ru/?from=exchange-banner"><img height="80"
+                src="https://www.diadoc.ru/Files/userfiles/image/tsrs/600-diadoc-exchange.png" width="600"
+                alt="https://www.diadoc.ru" /></a></p>
+
+    <p>&nbsp;</p>
+
+</body>

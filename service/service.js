@@ -1,3 +1,6 @@
+const fs = require('fs');
+var path = require('path');
+const ejs = require('ejs');
 const emails = require('../models/emails');
 const bitrix = require('../api/bitrix');
 
@@ -79,6 +82,8 @@ async function startQueue() {
       doc3
     } = obj;
 
+    /* PREPARE DATA */
+
     let deal = await bitrix.execMethod('crm.deal.get', { id: obj.deal_id });
     let {
       TITLE: deal_name,
@@ -116,7 +121,7 @@ async function startQueue() {
     let { '155881': product_email_support } = element_205.result[0].PROPERTY_1797;
     let { '157959': product_email_invoice } = element_205.result[0].PROPERTY_1803;
     let { '155907': product_domain_storage } = element_205.result[0].PROPERTY_1799;
-    let { '155909': product_url_tt } = element_205.result[0].PROPERTY_1801;
+    let { '155909': product_tt_url } = element_205.result[0].PROPERTY_1801;
 
     let element_199 = await bitrix.execMethod('lists.element.get', {
       IBLOCK_TYPE_ID: 'bitrix_processes',
@@ -124,8 +129,24 @@ async function startQueue() {
       ELEMENT_ID: party_id
     });
     let { NAME: party_name } = element_199.result[0];
-  
-    console.log('Prepare data');
+
+    /* PREPARE TEMPLATE */
+    let body = await ejs.renderFile(path.join(__dirname, '../template/body.ejs'), {
+      product_email_support: product_email_support,
+      segment_id: segment_id,
+      product_name: product_name,
+      party_id: party_id,
+      period_print: period_print,
+      year_print: year_print,
+      company_name: company_name,
+      party_name: party_name,
+      deal_name: deal_name,
+      email_to: email_to,
+      product_id: product_id,
+      product_tt_url: product_tt_url,
+    });
+
+    let 
   } catch (error) {
     console.log(error);
   }
