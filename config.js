@@ -12,7 +12,7 @@ module.exports = {
       port: 465,
       secure: true,
       user: 'apikey',
-      password: '11SG.pW-10xElRzG_QRAwv5O4NQ.mMe-Ma4fW1zJZZtWlfaNXMcSLMkwgYXugEmHUZfJbEg'
+      password: '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'
     }
   }
 };
