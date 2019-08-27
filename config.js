@@ -6,9 +6,13 @@ module.exports = {
       user_id: '1513',
       webhook_token: 'v5prxf1c1gdyya56',
       auth_type: 'webhook_token'
+    },
+    smtp: {
+      host: 'smtp.sendgrid.net',
+      port: 465,
+      secure: true,
+      user: 'apikey',
+      password: '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'
     }
-  },
-  prod: {
-
   }
 };

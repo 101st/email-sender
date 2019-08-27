@@ -1,8 +1,10 @@
 const fs = require('fs');
 var path = require('path');
 const ejs = require('ejs');
+const nodemailer = require('nodemailer');
 const emails = require('../models/emails');
 const bitrix = require('../api/bitrix');
+const config = require('../config');
 
 function prepareParamsArray(req) {
   try {
@@ -146,7 +148,72 @@ async function startQueue() {
       product_tt_url: product_tt_url,
     });
 
-    let 
+    let subject = await ejs.renderFile(path.join(__dirname, '../template/subject.ejs'), {
+      company_name: company_name,
+      period_print: period_print,
+      year_print: year_print
+    });
+
+    let doc = await ejs.renderFile(path.join(__dirname, '../template/doc.ejs'), {
+      doc1: doc1,
+      doc2: doc2,
+      doc3: doc3
+    });
+
+    let url = await ejs.renderFile(path.join(__dirname, '../template/url.ejs'), {
+      product_domain_storage: product_domain_storage,
+      file1: file1,
+      file2: file2,
+      file3: file3
+    });
+
+    const nodemailer = require('nodemailer');
+    let transporter = nodemailer.createTransport({
+      host: config.dev.smtp.host,
+      port: config.dev.smtp.port,
+      secure: config.dev.smtp.secure,
+      auth: {
+        user: config.dev.smtp.user,
+        pass: config.dev.smtp.password
+      }
+    });
+
+    /*
+    transporter.sendMail({
+      from: product_email_invoice,
+      to: email_to,
+      bcc: product_email_invoice,
+      subject: subject,
+      html: body
+    }, (error, info) => {
+      if (error) {
+        console.log(error);
+      }
+      console.log(info);
+    });
+    */
+
+    /*
+   { accepted:
+    [ 'ktgtylby@ya.ru',
+      'potorochinau@ya.ru',
+      '3dspaun@mail.ru',
+      'invoice@plusofon.ru' ],
+   rejected: [],
+   envelopeTime: 206,
+   messageTime: 60,
+   messageSize: 5732,
+   response: '250 Ok: queued as Lsv44F33RnCZMFXOPPCnPQ',
+   envelope:
+    { from: 'invoice@plusofon.ru',
+      to:
+       [ 'ktgtylby@ya.ru',
+         'potorochinau@ya.ru',
+         '3dspaun@mail.ru',
+         'invoice@plusofon.ru' ] },
+   messageId: '<dab44ded-d314-5473-7d2f-648a339593fe@plusofon.ru>' }
+   */
+
   } catch (error) {
     console.log(error);
   }
