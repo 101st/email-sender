@@ -178,7 +178,6 @@ async function startQueue() {
       }
     });
 
-    /*
     transporter.sendMail({
       from: product_email_invoice,
       to: email_to,
@@ -188,31 +187,10 @@ async function startQueue() {
     }, (error, info) => {
       if (error) {
         console.log(error);
+      } else {
+        console.log(info);
       }
-      console.log(info);
     });
-    */
-
-    /*
-   { accepted:
-    [ 'ktgtylby@ya.ru',
-      'potorochinau@ya.ru',
-      '3dspaun@mail.ru',
-      'invoice@plusofon.ru' ],
-   rejected: [],
-   envelopeTime: 206,
-   messageTime: 60,
-   messageSize: 5732,
-   response: '250 Ok: queued as Lsv44F33RnCZMFXOPPCnPQ',
-   envelope:
-    { from: 'invoice@plusofon.ru',
-      to:
-       [ 'ktgtylby@ya.ru',
-         'potorochinau@ya.ru',
-         '3dspaun@mail.ru',
-         'invoice@plusofon.ru' ] },
-   messageId: '<dab44ded-d314-5473-7d2f-648a339593fe@plusofon.ru>' }
-   */
 
   } catch (error) {
     console.log(error);
